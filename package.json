@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "nanoid": "^3.3.7",
+    "sqlite3": "^6.0.1"
+  }
+}

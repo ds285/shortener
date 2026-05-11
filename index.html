@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SocialMedia Shortener</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#0f172a;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+}
+
+.container{
+width:90%;
+max-width:700px;
+background:#111827;
+padding:40px;
+border-radius:20px;
+box-shadow:0 0 30px rgba(0,0,0,.5);
+}
+
+h1{
+text-align:center;
+margin-bottom:10px;
+font-size:3rem;
+}
+
+p{
+text-align:center;
+margin-bottom:30px;
+color:#cbd5e1;
+}
+
+.input-box{
+display:flex;
+gap:10px;
+}
+
+input{
+flex:1;
+padding:16px;
+border:none;
+outline:none;
+border-radius:12px;
+background:#1e293b;
+color:white;
+font-size:16px;
+}
+
+button{
+padding:16px 24px;
+border:none;
+border-radius:12px;
+background:#2563eb;
+color:white;
+cursor:pointer;
+font-weight:bold;
+}
+
+.result{
+margin-top:25px;
+background:#1e293b;
+padding:20px;
+border-radius:12px;
+display:none;
+}
+
+.result a{
+color:#60a5fa;
+text-decoration:none;
+font-size:18px;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>SocialMedia</h1>
+
+<p>Premium URL Shortener</p>
+
+<div class="input-box">
+
+<input type="text" id="urlInput" placeholder="Paste long URL here">
+
+<button onclick="shortenURL()">Shorten</button>
+
+</div>
+
+<div class="result" id="resultBox">
+
+<p>Your Short Link:</p>
+
+<a href="#" id="shortLink" target="_blank"></a>
+
+</div>
+
+</div>
+
+<script>
+
+async function shortenURL(){
+
+const url = document.getElementById("urlInput").value;
+
+const response = await fetch("/shorten",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({url})
+});
+
+const data = await response.json();
+
+document.getElementById("resultBox").style.display = "block";
+
+const realLink = window.location.origin + "/" + data.shortCode;
+
+const displayLink = "socialmedia/" + data.shortCode;
+
+const linkElement = document.getElementById("shortLink");
+
+linkElement.href = realLink;
+
+linkElement.innerText = displayLink;
+
+}
+
+</script>
+
+</body>
+</html>
