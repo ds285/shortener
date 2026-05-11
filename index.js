@@ -18,9 +18,9 @@ app.post("/shorten", (req, res) => {
 
   const { url } = req.body;
 
-  if(!url){
+  if (!url) {
     return res.status(400).json({
-      error:"URL required"
+      error: "URL required"
     });
   }
 
@@ -37,7 +37,7 @@ app.get("/:code", (req, res) => {
 
   const originalURL = urlDatabase[req.params.code];
 
-  if(originalURL){
+  if (originalURL) {
     return res.redirect(originalURL);
   }
 
